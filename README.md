@@ -4,17 +4,17 @@ Unf*cks the broken physics shape for `module_wall_plank_a` and `module_wall_plan
 
 ## The bug
 
-`module_wall_plank_a` and `module_wall_plank_b` ship in native Bannerlord with an inverted physics shape. The collision normals are flipped - pointing inward instead of outward - which means the game treats the inside of the entity as solid and the outside as passable. In practice: **you can walk straight into the plank, but once inside you cannot walk back out**. Players clip into the geometry and get stuck. This makes both entities a gameplay-breaking trap anywhere they appear in a multiplayer scene.
+`module_wall_plank_a` and `module_wall_plank_b` ship in native Bannerlord with an inverted physics shape. In practice **you can walk straight into the pole, but once inside you cannot walk back out**. Players clip into the geometry and get stuck. This makes both entities a potential trap anywhere they appear in a scene.
 
 This bug has been reported on the TaleWorlds forums: https://forums.taleworlds.com/index.php?threads/module_wall_plank_a-and-module_wall_plank_b-have-had-broken-physics-shapes-for-years.467778/
 
-TaleWorlds appears to have been aware of this prior to it being publicly reported. In the native **Town Outskirts** map, every `module_wall_plank_b` entity has had its physics shape manually deleted and replaced with invisible editor collision cubes - a workaround that only applies to that one map and was never applied to the entity itself. The appropriate fix would be to create a functional physics shape for each entity. Replacing it with a prefab is a band-aid fix. 
+TaleWorlds appears to have been aware of this prior to it being publicly reported. In the native **Town Outskirts** map, every `module_wall_plank_b` entity has had its physics shape manually deleted and replaced with invisible editor collision cubes - a workaround that only applies to that one map without fixing the underlying entity's broken physics shape. 
 
 **Replacements:**
 - `module_wall_plank_a` → `module_wall_plank_a_unfucked_by_fief`
 - `module_wall_plank_b` → `module_wall_plank_b_unfucked_by_fief`
 
-Position, rotation, and scale are preserved exactly.
+Position, rotation, and scale are preserved.
 
 ---
 
