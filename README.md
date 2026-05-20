@@ -25,7 +25,6 @@ Fief_NativeEntitySwaps.xml
 
 - Windows (PowerShell is built in — no install needed)
 - Bannerlord installed via Steam (standard path auto-detected; see `-BannerlordPath` below for non-standard installs)
-- Your scene must be in your own module, not in Native
 
 ---
 
@@ -43,14 +42,22 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 
 Open PowerShell in the folder containing the two bundle files, then:
 
-**Fix a single scene:**
+**Option A — Drop your map folder in and run with no arguments:**
+
+Copy your map folder (the one containing `scene.xscene`) into the same folder as the script, then just run:
 ```
-.\bannerlord_physics_unf-cker.ps1 -Path "C:\path\to\YourMod\SceneObj\your_scene\scene.xscene"
+.\bannerlord_physics_unf-cker.ps1
+```
+The script will detect any map folders sitting alongside it automatically. Works with any map — Native, Multiplayer module, your own mod, anything.
+
+**Option B — Point it at any scene directly:**
+```
+.\bannerlord_physics_unf-cker.ps1 -Path "C:\path\to\any\map_folder\scene.xscene"
 ```
 
-**Fix all scenes in a module folder at once:**
+**Option C — Point it at a folder and fix everything inside:**
 ```
-.\bannerlord_physics_unf-cker.ps1 -Path "C:\path\to\YourMod\SceneObj" -Recurse
+.\bannerlord_physics_unf-cker.ps1 -Path "C:\path\to\Multiplayer\SceneObj" -Recurse
 ```
 
 **Non-standard Bannerlord install location:**
@@ -60,7 +67,7 @@ Open PowerShell in the folder containing the two bundle files, then:
 
 **Dry run — see what would change without touching any files:**
 ```
-.\bannerlord_physics_unf-cker.ps1 -Path "C:\path\to\scene.xscene" -WhatIf
+.\bannerlord_physics_unf-cker.ps1 -WhatIf
 ```
 
 The script will:
@@ -78,7 +85,7 @@ After running the script, open your scene in the Bannerlord editor. For each rep
 2. Right-click → **Break Prefab**
 3. Save the scene
 
-This converts the replacement prefab's child entities into standalone objects, which is required for the physics to work correctly for other players in native MP who don't have the prefab file.
+This bakes the prefab's child entities into the scene as standalone objects. Without this step, anyone loading the scene needs the prefab file loaded in a module — breaking it means the fix is self-contained in the scene with no external dependency.
 
 ---
 

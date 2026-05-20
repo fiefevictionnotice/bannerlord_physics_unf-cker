@@ -46,7 +46,7 @@
 [CmdletBinding(SupportsShouldProcess)]
 param(
     [Parameter(Position = 0, ValueFromPipeline, ValueFromPipelineByPropertyName)]
-    [string[]]$Path = @('.'),
+    [string[]]$Path,
 
     [switch]$Recurse,
 
@@ -171,13 +171,30 @@ begin {
         }
         return $files
     }
+
 }
 
 process {
-    $sceneFiles = Resolve-SceneFiles -InputPaths $Path -DoRecurse $Recurse.IsPresent
+    # If no path given, scan the script's own directory for dropped map folders
+    $resolvedPath = $Path
+    if (-not $resolvedPath) {
+        Write-Host "[Auto] No path specified — scanning script folder for map folders..."
+        $resolvedPath = Get-ChildItem $scriptDir -Directory |
+            Where-Object { Test-Path (Join-Path $_.FullName 'scene.xscene') } |
+            ForEach-Object { $_.FullName }
+        if ($resolvedPath) {
+            Write-Host "[Auto] Found: $($resolvedPath -join ', ')"
+        } else {
+            Write-Warning "No map folders found in script directory and no -Path specified."
+            Write-Warning "Drop a map folder (containing scene.xscene) alongside the script, or use -Path."
+            return
+        }
+    }
+
+    $sceneFiles = Resolve-SceneFiles -InputPaths $resolvedPath -DoRecurse $Recurse.IsPresent
 
     if ($sceneFiles.Count -eq 0) {
-        Write-Warning "No scene.xscene files found under: $($Path -join ', ')"
+        Write-Warning "No scene.xscene files found under: $($resolvedPath -join ', ')"
         return
     }
 
