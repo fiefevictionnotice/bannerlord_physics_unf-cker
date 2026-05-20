@@ -90,7 +90,7 @@ After running the script, open your scene in the Bannerlord editor:
 3. Right-click → **Break Prefab**
 4. Save the scene
 
-This bakes the prefab's child entities into the scene as standalone objects. Without this step, anyone loading the scene needs the prefab file loaded in a module — breaking it means the fix is self-contained in the scene with no external dependency.
+This bakes the prefab's child entities into the scene as standalone objects. Without this step, anyone loading the scene needs the prefab file loaded in a module. Breaking the prefab means the prefab is self-contained in the scene file without an external dependency.
 
 ---
 
