@@ -2,6 +2,10 @@
 
 Unf*cks the broken physics shape for `module_wall_plank_a` and `module_wall_plank_b` by replacing them with an identically sized prefab with working colliders. You will need to break the prefab in the editor afterwards for it to work correctly in native MP for other players.
 
+## The bug
+
+`module_wall_plank_a` and `module_wall_plank_b` ship in native Bannerlord with an inverted physics shape. The collision normals are flipped — pointing inward instead of outward — which means the game treats the inside of the entity as solid and the outside as passable. In practice: **you can walk straight into the plank, but once inside you cannot walk back out**. Players clip into the geometry and get stuck. This makes both entities a gameplay-breaking trap anywhere they appear in a multiplayer scene.
+
 **Replacements:**
 - `module_wall_plank_a` → `module_wall_plank_a_unfucked_by_fief`
 - `module_wall_plank_b` → `module_wall_plank_b_unfucked_by_fief`
