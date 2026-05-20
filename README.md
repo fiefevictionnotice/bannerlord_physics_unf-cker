@@ -8,7 +8,7 @@ Unf*cks the broken physics shape for `module_wall_plank_a` and `module_wall_plan
 
 This bug has been reported on the TaleWorlds forums: https://forums.taleworlds.com/index.php?threads/module_wall_plank_a-and-module_wall_plank_b-have-had-broken-physics-shapes-for-years.467778/
 
-TaleWorlds appears to have been aware of this prior to it being publicly reported. In the native **Town Outskirts** map, every `module_wall_plank_b` entity has had its physics shape manually deleted and replaced with invisible editor collision cubes - a workaround that only applies to that one map and was never applied to the prefab itself or any other scene.
+TaleWorlds appears to have been aware of this prior to it being publicly reported. In the native **Town Outskirts** map, every `module_wall_plank_b` entity has had its physics shape manually deleted and replaced with invisible editor collision cubes - a workaround that only applies to that one map and was never applied to the entity itself. The appropriate fix would be to create a functional physics shape for each entity. Replacing it with a prefab is a band-aid fix. 
 
 **Replacements:**
 - `module_wall_plank_a` → `module_wall_plank_a_unfucked_by_fief`
