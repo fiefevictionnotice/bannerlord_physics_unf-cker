@@ -116,13 +116,22 @@ begin {
                     $install = $true
 
                     if (Test-Path $targetFile) {
-                        $existingHash = (Get-FileHash $targetFile   -Algorithm MD5).Hash
+                        $existingHash = (Get-FileHash $targetFile    -Algorithm MD5).Hash
                         $bundledHash  = (Get-FileHash $bundledPrefab -Algorithm MD5).Hash
                         if ($existingHash -eq $bundledHash) {
-                            Write-Host "[Prefabs] $prefabFileName already up to date in SandBoxCore\Prefabs. Skipping install."
+                            Write-Host "[Prefabs] $prefabFileName already up to date. Skipping install."
                             $install = $false
                         } else {
-                            Write-Host "[Prefabs] Existing $prefabFileName differs from bundle — will overwrite."
+                            $existingSize = (Get-Item $targetFile).Length
+                            $bundledSize  = (Get-Item $bundledPrefab).Length
+                            Write-Host "[Prefabs] Version mismatch detected:"
+                            Write-Host "  Installed : $existingSize bytes  ($targetFile)"
+                            Write-Host "  Bundled   : $bundledSize bytes  ($bundledPrefab)"
+                            $answer = Read-Host "[Prefabs] Overwrite installed version? (y/n)"
+                            if ($answer -notmatch '^[Yy]') {
+                                Write-Host "[Prefabs] Skipping install — using existing version."
+                                $install = $false
+                            }
                         }
                     }
 

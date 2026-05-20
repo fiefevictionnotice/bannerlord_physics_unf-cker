@@ -116,7 +116,6 @@ C:\...\YourMod\SceneObj\your_scene\scene.xscene
 |---|---|
 | `-Recurse` | Search subdirectories for scene files |
 | `-BannerlordPath` | Manually specify Bannerlord install root |
-| `-SkipPrefabInstall` | Skip copying `Fief_NativeEntitySwaps.xml` (if already installed) |
 | `-WhatIf` | Dry run — no files modified |
 | `-NoBackup` | Skip creating `.bak` backups |
 | `-Verbose` | Show skipped files and backup paths |
