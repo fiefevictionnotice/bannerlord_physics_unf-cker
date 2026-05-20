@@ -4,7 +4,11 @@ Unf*cks the broken physics shape for `module_wall_plank_a` and `module_wall_plan
 
 ## The bug
 
-`module_wall_plank_a` and `module_wall_plank_b` ship in native Bannerlord with an inverted physics shape. The collision normals are flipped — pointing inward instead of outward — which means the game treats the inside of the entity as solid and the outside as passable. In practice: **you can walk straight into the plank, but once inside you cannot walk back out**. Players clip into the geometry and get stuck. This makes both entities a gameplay-breaking trap anywhere they appear in a multiplayer scene.
+`module_wall_plank_a` and `module_wall_plank_b` ship in native Bannerlord with an inverted physics shape. The collision normals are flipped - pointing inward instead of outward - which means the game treats the inside of the entity as solid and the outside as passable. In practice: **you can walk straight into the plank, but once inside you cannot walk back out**. Players clip into the geometry and get stuck. This makes both entities a gameplay-breaking trap anywhere they appear in a multiplayer scene.
+
+This bug has been reported on the TaleWorlds forums: https://forums.taleworlds.com/index.php?threads/module_wall_plank_a-and-module_wall_plank_b-have-had-broken-physics-shapes-for-years.467778/
+
+TaleWorlds appears to have been aware of this prior to it being publicly reported. In the native **Town Outskirts** map, every `module_wall_plank_b` entity has had its physics shape manually deleted and replaced with invisible editor collision cubes - a workaround that only applies to that one map and was never applied to the prefab itself or any other scene.
 
 **Replacements:**
 - `module_wall_plank_a` → `module_wall_plank_a_unfucked_by_fief`
@@ -27,12 +31,12 @@ Fief_NativeEntitySwaps.xml
 
 ## Prerequisites
 
-- Windows (PowerShell is built in — no install needed)
+- Windows (PowerShell is built in - no install needed)
 - Bannerlord installed via Steam (standard path auto-detected; see `-BannerlordPath` below for non-standard installs)
 
 ---
 
-## Step 1 — First-time PowerShell setup
+## Step 1 - First-time PowerShell setup
 
 Open PowerShell and run this once to allow scripts to run:
 
@@ -42,24 +46,24 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 
 ---
 
-## Step 2 — Run the script
+## Step 2 - Run the script
 
 Open PowerShell in the folder containing the two bundle files, then:
 
-**Option A — Drop your map folder in and run with no arguments:**
+**Option A - Drop your map folder in and run with no arguments:**
 
 Copy your map folder (the one containing `scene.xscene`) into the same folder as the script, then just run:
 ```
 .\bannerlord_physics_unf-cker.ps1
 ```
-The script will detect any map folders sitting alongside it automatically. Works with any map — Native, Multiplayer module, your own mod, anything.
+The script will detect any map folders sitting alongside it automatically. Works with any map - Native, Multiplayer module, your own mod, anything.
 
-**Option B — Point it at any scene directly:**
+**Option B - Point it at any scene directly:**
 ```
 .\bannerlord_physics_unf-cker.ps1 -Path "C:\path\to\any\map_folder\scene.xscene"
 ```
 
-**Option C — Point it at a folder and fix everything inside:**
+**Option C - Point it at a folder and fix everything inside:**
 ```
 .\bannerlord_physics_unf-cker.ps1 -Path "C:\path\to\Multiplayer\SceneObj" -Recurse
 ```
@@ -69,7 +73,7 @@ The script will detect any map folders sitting alongside it automatically. Works
 .\bannerlord_physics_unf-cker.ps1 -Path "..." -BannerlordPath "D:\Games\Mount & Blade II Bannerlord"
 ```
 
-**Dry run — see what would change without touching any files:**
+**Dry run - see what would change without touching any files:**
 ```
 .\bannerlord_physics_unf-cker.ps1 -WhatIf
 ```
@@ -81,7 +85,7 @@ The script will:
 
 ---
 
-## Step 3 — Break the prefabs in the editor
+## Step 3 - Break the prefabs in the editor
 
 After running the script, open your scene in the Bannerlord editor:
 
@@ -90,7 +94,7 @@ After running the script, open your scene in the Bannerlord editor:
 3. Right-click → **Break Prefab**
 4. Save the scene
 
-This bakes the prefab's child entities into the scene as standalone objects. Without this step, anyone loading the scene needs the prefab file loaded in a module. Breaking the prefab means the prefab is self-contained in the scene file without an external dependency.
+This bakes the prefab's child entities into the scene as standalone objects. Without this step, anyone loading the scene needs the prefab file loaded in a module - breaking it means the fix is self-contained in the scene with no external dependency.
 
 ---
 
@@ -121,6 +125,6 @@ C:\...\YourMod\SceneObj\your_scene\scene.xscene
 |---|---|
 | `-Recurse` | Search subdirectories for scene files |
 | `-BannerlordPath` | Manually specify Bannerlord install root |
-| `-WhatIf` | Dry run — no files modified |
+| `-WhatIf` | Dry run - no files modified |
 | `-NoBackup` | Skip creating `.bak` backups |
 | `-Verbose` | Show skipped files and backup paths |
