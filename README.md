@@ -67,9 +67,9 @@ The script will detect any map folders sitting alongside it automatically. Works
 .\bannerlord_physics_unf-cker.ps1 -Path "C:\path\to\any\map_folder\scene.xscene"
 ```
 
-**Option C - Point it at a folder and fix everything inside:**
+**Option C - Point it at a folder and fix everything inside:** In practice, a terrible idea to use against the Native or Multiplayer modules in recursive mode!
 ```
-.\bannerlord_physics_unf-cker.ps1 -Path "C:\path\to\Multiplayer\SceneObj" -Recurse
+.\bannerlord_physics_unf-cker.ps1 -Path "C:\path\to\ModuleNameHere\SceneObj" -Recurse
 ```
 
 **Non-standard Bannerlord install location:**
