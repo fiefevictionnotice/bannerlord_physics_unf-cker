@@ -45,7 +45,7 @@ Set-ExecutionPolicy -Scope CurrentUser RemoteSigned
 ```
 Alternatively, use this in each session:
 ```
-Set-ExecutionPolicy -Scope Process RemoteSigned; .\bannerlord—physics_unf-cker.ps1
+Set-ExecutionPolicy -Scope Process RemoteSigned; .\bannerlord_physics_unf-cker.ps1
 ```
 
 ---
