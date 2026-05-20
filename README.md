@@ -1,6 +1,6 @@
 # bannerlord_physics_unf-cker
 
-Unf*cks the broken physics shape for `module_wall_plank_a` and `module_wall_plank_b` by replacing them with an identically sized prefab with working colliders. You will need to break the prefab in the editor afterwards for it to work correctly in native MP for other players.
+Unf*cks the broken physics shape for `module_wall_plank_a` and `module_wall_plank_b` by replacing them with an identically sized prefab with working collision. You will need to break the prefab in the editor afterwards for it to work correctly in native MP for other players.
 
 ## The bug
 
